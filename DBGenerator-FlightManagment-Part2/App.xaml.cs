@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace DBGenerator_FlightManagment_Part2
+namespace LetsFly_DBGenerator
 {
     /// <summary>
     /// Interaction logic for App.xaml

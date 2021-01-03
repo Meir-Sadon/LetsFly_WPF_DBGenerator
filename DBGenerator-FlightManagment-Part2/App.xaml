@@ -1,7 +1,7 @@
-﻿<Application x:Class="DBGenerator_FlightManagment_Part2.App"
+﻿<Application x:Class="LetsFly_DBGenerator.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:DBGenerator_FlightManagment_Part2"
+             xmlns:local="clr-namespace:LetsFly_DBGenerator"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>

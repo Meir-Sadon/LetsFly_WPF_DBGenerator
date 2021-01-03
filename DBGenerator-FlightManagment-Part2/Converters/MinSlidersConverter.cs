@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace DBGenerator_FlightManagment_Part2
+namespace LetsFly_DBGenerator
 {
     public class MinSlidersConverter : IValueConverter
     {

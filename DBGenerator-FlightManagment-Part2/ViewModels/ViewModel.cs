@@ -1,4 +1,4 @@
-﻿using FlightManagment___Basic___Part_1;
+﻿using LetsFly_DAL;
 using log4net;
 using Prism.Commands;
 using System;
@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 
-namespace DBGenerator_FlightManagment_Part2
+namespace LetsFly_DBGenerator
 {
     public class ViewModel : INotifyPropertyChanged
     {

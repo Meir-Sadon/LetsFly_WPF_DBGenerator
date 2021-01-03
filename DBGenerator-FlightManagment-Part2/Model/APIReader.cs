@@ -1,4 +1,4 @@
-﻿using FlightManagment___Basic___Part_1;
+﻿using LetsFly_DAL;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 
-namespace DBGenerator_FlightManagment_Part2
+namespace LetsFly_DBGenerator
 {
     public class APIReader
     {
@@ -153,10 +153,12 @@ namespace DBGenerator_FlightManagment_Part2
             IList<AirlineCompany> companies = new AnonymousUserFacade().GetAllAirlineCompanies();
             IList<Country> countries = new AnonymousUserFacade().GetAllCountries();
             MainWindow.m_Dispatcher.Invoke(DispatcherPriority.ApplicationIdle, new ThreadStart(new Action(() => ViewModel.Logger.Add("Start Create Flights..."))));
+            User user;
             for (int i = 0; i < userNamesOfCompanies.Count; i++)
             {
-                FlyingCenterSystem.GetUserAndFacade(adminFacade.GetAirlineByUserName(adminToken, userNamesOfCompanies[i]).User_Name,
-                     adminFacade.GetAirlineByUserName(adminToken, userNamesOfCompanies[i]).Password, out ILogin token, out FacadeBase facade);
+                user = new User(adminFacade.GetAirlineByUserName(adminToken, userNamesOfCompanies[i]).User_Name,
+                    adminFacade.GetAirlineByUserName(adminToken, userNamesOfCompanies[i]).Password,UserType.Airline,true);
+                FlyingCenterSystem.GetUserAndFacade(user, out ILogin token, out FacadeBase facade);
                 LoginToken<AirlineCompany> airlineToken = token as LoginToken<AirlineCompany>;
                 LoggedInAirlineFacade airlineFacade = facade as LoggedInAirlineFacade;
                 for (int j = 0; j < times; j++)
@@ -190,11 +192,13 @@ namespace DBGenerator_FlightManagment_Part2
             IList<Customer> customers = adminFacade.GetAllCustomers(adminToken);
             IList<Flight> flights = new AnonymousUserFacade().GetAllFlights();
             MainWindow.m_Dispatcher.Invoke(DispatcherPriority.ApplicationIdle, new ThreadStart(new Action(() => ViewModel.Logger.Add("Start Create Tickets..."))));
+            User user;
             for (int i = 0; i < userNamesOfCustomers.Count; i++)
             {
-                FlyingCenterSystem.GetUserAndFacade(adminFacade.GetCustomerByUserName(adminToken, userNamesOfCustomers[i]).User_Name, adminFacade.GetCustomerByUserName(adminToken, userNamesOfCustomers[i]).Password, out ILogin token, out FacadeBase facade);
+                user = new User(adminFacade.GetCustomerByUserName(adminToken, userNamesOfCustomers[i]).User_Name, adminFacade.GetCustomerByUserName(adminToken, userNamesOfCustomers[i]).Password,UserType.Customer,true);
+                FlyingCenterSystem.GetUserAndFacade(user, out ILogin token, out FacadeBase facade);
                 LoginToken<Customer> customerToken = token as LoginToken<Customer>;
-                LoggedInCustomerFacade customerFacade = facade as LoggedInCustomerFacade;
+                LoggedInCustomerFacade customerFacade = new LoggedInCustomerFacade();
                 for (int j = 0; j < times; j++)
                 {
                     HttpResponseMessage response = client.GetAsync("").Result;

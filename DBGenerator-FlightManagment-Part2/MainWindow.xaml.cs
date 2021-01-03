@@ -18,7 +18,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.IO;
 
-namespace DBGenerator_FlightManagment_Part2
+namespace LetsFly_DBGenerator
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
